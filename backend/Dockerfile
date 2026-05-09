@@ -12,6 +12,7 @@ RUN apk add --no-cache \
     freetype-dev \
     icu-dev \
     oniguruma-dev \
+    sqlite-dev \
     autoconf \
     g++ \
     make \
