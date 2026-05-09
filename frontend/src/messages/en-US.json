@@ -1,0 +1,178 @@
+{
+  "common": {
+    "appName": "Framily",
+    "tagline": "Your home leveling up, every day.",
+    "loading": "Loading…",
+    "save": "Save",
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "delete": "Delete",
+    "confirm": "Confirm",
+    "back": "Back",
+    "next": "Next",
+    "search": "Search",
+    "all": "All",
+    "none": "None",
+    "soon": "Coming soon",
+    "phasePlaceholder": "Under construction — this screen ships in the next phase."
+  },
+  "auth": {
+    "loginTitle": "Sign in to Framily",
+    "loginSubtitle": "Enter your home and check the family progress.",
+    "registerTitle": "Create your Framily account",
+    "registerSubtitle": "Start organizing your family missions.",
+    "email": "Email",
+    "password": "Password",
+    "passwordConfirmation": "Confirm password",
+    "name": "Name",
+    "submitLogin": "Sign in",
+    "submitRegister": "Create account",
+    "noAccount": "Don't have an account yet?",
+    "haveAccount": "Already have an account?",
+    "registerCta": "Sign up",
+    "loginCta": "Sign in",
+    "logout": "Sign out",
+    "social": {
+      "google": "Continue with Google"
+    }
+  },
+  "kids": {
+    "loginTitle": "Sign in to the kids area",
+    "loginSubtitle": "Use your nickname and PIN, or your email.",
+    "modeNickname": "Nickname & PIN",
+    "modeEmail": "Email & password",
+    "householdCode": "Home code",
+    "nickname": "Nickname",
+    "pin": "PIN",
+    "submit": "Sign in",
+    "dashboardTitle": "Hey! Ready to crush today's missions?",
+    "myTasksToday": "My tasks today",
+    "myMissions": "My missions",
+    "myPoints": "My points",
+    "weeklyProgress": "Weekly progress",
+    "nextReward": "Next reward",
+    "myAchievements": "My achievements"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "tasks": "Tasks",
+    "missions": "Missions",
+    "ranking": "Ranking",
+    "rewards": "Rewards",
+    "calendar": "Calendar",
+    "reminders": "Reminders",
+    "bills": "Bills",
+    "shopping": "Shopping",
+    "members": "Members",
+    "settings": "Settings",
+    "achievements": "Achievements",
+    "kidsArea": "Kids area",
+    "logout": "Sign out"
+  },
+  "dashboard": {
+    "welcome": "Welcome to Framily",
+    "summary": "Your home overview",
+    "weeklyGoal": "Weekly goal",
+    "topMembers": "Family highlights",
+    "upcomingTasks": "Upcoming tasks",
+    "activeMissions": "Active missions"
+  },
+  "gamification": {
+    "points": "Points",
+    "level": "Level",
+    "weekProgress": "Weekly progress",
+    "nextRewardIn": "{points} pts left for {reward}",
+    "difficulty": {
+      "easy": "Easy",
+      "medium": "Medium",
+      "hard": "Hard",
+      "challenge": "Challenge"
+    },
+    "missionTypes": {
+      "single_task": "Single task",
+      "recurring_task": "Recurring",
+      "streak": "Streak",
+      "count": "Count",
+      "collective": "Collective",
+      "custom": "Custom"
+    }
+  },
+  "empty": {
+    "tasks": "No tasks here yet.",
+    "missions": "No active missions yet.",
+    "rewards": "No rewards configured yet.",
+    "members": "Add members to get started.",
+    "general": "Nothing to show."
+  },
+  "errors": {
+    "generic": "Something went wrong. Try again.",
+    "network": "No connection to the server.",
+    "unauthenticated": "You need to sign in to continue.",
+    "forbidden": "You do not have permission for this action.",
+    "validation_failed": "Please check the submitted data.",
+    "child_cannot_access_adult_area": "This area is for household adults only.",
+    "kids_route_requires_child_account": "This area is for kids only.",
+    "invalid_pin": "Invalid nickname or PIN.",
+    "child_account_disabled": "Your account is disabled. Talk to a guardian.",
+    "task_already_completed": "This task is already completed.",
+    "mission_already_completed": "This mission is already completed.",
+    "requires_adult_approval": "Pending adult approval.",
+    "insufficient_points": "Not enough points for this reward.",
+    "reward_unavailable": "This reward isn't available right now."
+  },
+  "ranking": {
+    "title": "Family ranking",
+    "scopeWeek": "This week",
+    "scopeMonth": "This month",
+    "scopeAll": "All time",
+    "podiumTitle": "Podium",
+    "tableTitle": "Standings",
+    "empty": "Start completing tasks to climb the ranking!"
+  },
+  "rewards": {
+    "title": "Rewards",
+    "catalog": "Catalog",
+    "myRedemptions": "My redemptions",
+    "pendingApprovals": "Pending approvals",
+    "newReward": "New reward",
+    "redeem": "Redeem",
+    "missingPoints": "{points} pts to go",
+    "approve": "Approve",
+    "deny": "Deny",
+    "deliver": "Mark delivered",
+    "statusPending": "Pending",
+    "statusApproved": "Approved",
+    "statusDenied": "Denied",
+    "statusDelivered": "Delivered"
+  },
+  "achievements": {
+    "title": "Achievements",
+    "unlocked": "Unlocked",
+    "locked": "To unlock",
+    "summary": "{unlocked} of {total} unlocked",
+    "first_task": { "name": "First step", "description": "Completed your first task." },
+    "first_mission": { "name": "On a mission", "description": "Completed your first mission." },
+    "pts_week_50": { "name": "Good week", "description": "50 points in a week." },
+    "pts_week_100": { "name": "Top week", "description": "100 points in a week." },
+    "pts_total_500": { "name": "Veteran", "description": "Reached 500 points." },
+    "pts_total_2000": { "name": "Legendary", "description": "2000 points total." },
+    "first_redeem": { "name": "First redeem", "description": "Spent points on a reward." },
+    "team_player": { "name": "Team player", "description": "Completed a collective mission." }
+  },
+  "landing": {
+    "hero": {
+      "title": "The whole family leveling up together.",
+      "subtitle": "Tasks, missions, rewards and rankings to make family routines lighter and more motivating.",
+      "ctaPrimary": "Create my family",
+      "ctaSecondary": "I have an account"
+    },
+    "features": {
+      "progressTitle": "Visible progress",
+      "progressBody": "Every completed task turns into points that bring the family closer to the next reward.",
+      "missionsTitle": "Configurable missions",
+      "missionsBody": "Use ready-made templates or build missions from scratch tailored to your home.",
+      "kidsTitle": "Kids area",
+      "kidsBody": "Simple sign-in (nickname & PIN) and a safe experience supervised by an adult."
+    }
+  }
+}

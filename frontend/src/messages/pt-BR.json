@@ -1,0 +1,178 @@
+{
+  "common": {
+    "appName": "Framily",
+    "tagline": "Sua casa evoluindo, todo dia.",
+    "loading": "Carregando…",
+    "save": "Salvar",
+    "cancel": "Cancelar",
+    "edit": "Editar",
+    "delete": "Excluir",
+    "confirm": "Confirmar",
+    "back": "Voltar",
+    "next": "Próximo",
+    "search": "Buscar",
+    "all": "Todos",
+    "none": "Nenhum",
+    "soon": "Em breve",
+    "phasePlaceholder": "Em construção — esta tela será implementada na próxima fase."
+  },
+  "auth": {
+    "loginTitle": "Entrar no Framily",
+    "loginSubtitle": "Acesse a sua casa e veja o progresso da família.",
+    "registerTitle": "Criar conta no Framily",
+    "registerSubtitle": "Comece a organizar as missões da sua família.",
+    "email": "E-mail",
+    "password": "Senha",
+    "passwordConfirmation": "Confirmar senha",
+    "name": "Nome",
+    "submitLogin": "Entrar",
+    "submitRegister": "Criar conta",
+    "noAccount": "Ainda não tem conta?",
+    "haveAccount": "Já tem uma conta?",
+    "registerCta": "Cadastre-se",
+    "loginCta": "Entrar",
+    "logout": "Sair",
+    "social": {
+      "google": "Continuar com Google"
+    }
+  },
+  "kids": {
+    "loginTitle": "Entrar na área das crianças",
+    "loginSubtitle": "Use seu apelido e PIN, ou seu e-mail.",
+    "modeNickname": "Apelido e PIN",
+    "modeEmail": "E-mail e senha",
+    "householdCode": "Código da casa",
+    "nickname": "Apelido",
+    "pin": "PIN",
+    "submit": "Entrar",
+    "dashboardTitle": "Olá! Vamos completar suas missões hoje?",
+    "myTasksToday": "Minhas tarefas de hoje",
+    "myMissions": "Minhas missões",
+    "myPoints": "Meus pontos",
+    "weeklyProgress": "Progresso da semana",
+    "nextReward": "Próxima recompensa",
+    "myAchievements": "Minhas conquistas"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "tasks": "Tarefas",
+    "missions": "Missões",
+    "ranking": "Ranking",
+    "rewards": "Recompensas",
+    "calendar": "Calendário",
+    "reminders": "Lembretes",
+    "bills": "Contas",
+    "shopping": "Compras",
+    "members": "Membros",
+    "settings": "Configurações",
+    "achievements": "Conquistas",
+    "kidsArea": "Área das crianças",
+    "logout": "Sair"
+  },
+  "dashboard": {
+    "welcome": "Bem-vindo(a) ao Framily",
+    "summary": "Resumo da sua casa",
+    "weeklyGoal": "Meta da semana",
+    "topMembers": "Destaques da família",
+    "upcomingTasks": "Próximas tarefas",
+    "activeMissions": "Missões ativas"
+  },
+  "gamification": {
+    "points": "Pontos",
+    "level": "Nível",
+    "weekProgress": "Progresso da semana",
+    "nextRewardIn": "Faltam {points} pts para {reward}",
+    "difficulty": {
+      "easy": "Fácil",
+      "medium": "Médio",
+      "hard": "Difícil",
+      "challenge": "Desafio"
+    },
+    "missionTypes": {
+      "single_task": "Tarefa única",
+      "recurring_task": "Recorrente",
+      "streak": "Sequência",
+      "count": "Contagem",
+      "collective": "Coletiva",
+      "custom": "Personalizada"
+    }
+  },
+  "empty": {
+    "tasks": "Nenhuma tarefa por aqui ainda.",
+    "missions": "Nenhuma missão ativa no momento.",
+    "rewards": "Ainda não há recompensas configuradas.",
+    "members": "Adicione membros para começar.",
+    "general": "Nada para mostrar."
+  },
+  "errors": {
+    "generic": "Algo deu errado. Tente novamente.",
+    "network": "Sem conexão com o servidor.",
+    "unauthenticated": "Você precisa entrar para continuar.",
+    "forbidden": "Você não tem permissão para esta ação.",
+    "validation_failed": "Confira os dados informados.",
+    "child_cannot_access_adult_area": "Esta área é só para os adultos da casa.",
+    "kids_route_requires_child_account": "Esta área é só para as crianças.",
+    "invalid_pin": "Apelido ou PIN incorreto.",
+    "child_account_disabled": "Sua conta está desativada. Fale com um responsável.",
+    "task_already_completed": "Esta tarefa já foi concluída.",
+    "mission_already_completed": "Esta missão já foi concluída.",
+    "requires_adult_approval": "Aguardando aprovação de um adulto.",
+    "insufficient_points": "Pontos insuficientes para esta recompensa.",
+    "reward_unavailable": "Esta recompensa não está disponível agora."
+  },
+  "ranking": {
+    "title": "Ranking da família",
+    "scopeWeek": "Esta semana",
+    "scopeMonth": "Este mês",
+    "scopeAll": "Geral",
+    "podiumTitle": "Pódio",
+    "tableTitle": "Classificação",
+    "empty": "Comece a concluir tarefas para entrar no ranking!"
+  },
+  "rewards": {
+    "title": "Recompensas",
+    "catalog": "Catálogo",
+    "myRedemptions": "Meus resgates",
+    "pendingApprovals": "Aprovações pendentes",
+    "newReward": "Nova recompensa",
+    "redeem": "Resgatar",
+    "missingPoints": "Faltam {points} pts",
+    "approve": "Aprovar",
+    "deny": "Negar",
+    "deliver": "Marcar entregue",
+    "statusPending": "Pendente",
+    "statusApproved": "Aprovado",
+    "statusDenied": "Negado",
+    "statusDelivered": "Entregue"
+  },
+  "achievements": {
+    "title": "Conquistas",
+    "unlocked": "Desbloqueadas",
+    "locked": "A desbloquear",
+    "summary": "{unlocked} de {total} desbloqueadas",
+    "first_task": { "name": "Primeiro passo", "description": "Concluiu sua primeira tarefa." },
+    "first_mission": { "name": "Em missão", "description": "Completou a primeira missão." },
+    "pts_week_50": { "name": "Boa semana", "description": "50 pontos em uma semana." },
+    "pts_week_100": { "name": "Semana TOP", "description": "100 pontos em uma semana." },
+    "pts_total_500": { "name": "Veterano", "description": "Acumulou 500 pontos." },
+    "pts_total_2000": { "name": "Lendário", "description": "2000 pontos no total." },
+    "first_redeem": { "name": "Primeiro resgate", "description": "Trocou pontos por uma recompensa." },
+    "team_player": { "name": "Time unido", "description": "Concluiu uma missão coletiva." }
+  },
+  "landing": {
+    "hero": {
+      "title": "A casa toda evoluindo junto.",
+      "subtitle": "Tarefas, missões, recompensas e ranking para tornar a rotina familiar leve e motivadora.",
+      "ctaPrimary": "Criar minha família",
+      "ctaSecondary": "Já tenho conta"
+    },
+    "features": {
+      "progressTitle": "Progresso visível",
+      "progressBody": "Cada tarefa concluída vira pontos e aproxima a família da próxima recompensa.",
+      "missionsTitle": "Missões personalizáveis",
+      "missionsBody": "Use modelos prontos ou crie missões do zero adaptadas à sua casa.",
+      "kidsTitle": "Área das crianças",
+      "kidsBody": "Login simples (apelido e PIN) e experiência segura, supervisionada por um adulto."
+    }
+  }
+}

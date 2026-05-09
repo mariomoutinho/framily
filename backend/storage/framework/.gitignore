@@ -1,0 +1,8 @@
+cache/data/*
+!cache/data/.gitkeep
+sessions/*
+!sessions/.gitkeep
+views/*
+!views/.gitkeep
+testing/*
+!testing/.gitkeep
