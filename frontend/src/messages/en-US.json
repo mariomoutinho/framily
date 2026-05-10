@@ -55,6 +55,7 @@
   },
   "nav": {
     "dashboard": "Dashboard",
+    "myHouse": "My home",
     "tasks": "Tasks",
     "missions": "Missions",
     "ranking": "Ranking",
