@@ -16,9 +16,9 @@ use Illuminate\Support\Facades\DB;
 class TaskCompletionController extends Controller
 {
     /**
-     * Marca a tarefa como concluída.
+     * Marca a tarefa como concluida.
      *  - Adulto: aprova direto (status=approved, points_awarded calculado, PointTransaction confirmed)
-     *  - Criança em tarefa com requires_approval=true: cria pending; PointTransaction pending
+     *  - Crianca em tarefa com requires_approval=true: cria pending; PointTransaction pending
      */
     public function complete(Request $request, Household $household, Task $task): TaskCompletionResource
     {
@@ -27,18 +27,41 @@ class TaskCompletionController extends Controller
 
         $user = $request->user();
 
-        // Apenas o atribuído (ou o adulto criando o registro) pode concluir.
         $isAssignee = $task->assignees()->where('users.id', $user->id)->exists();
         if ($user->isChild() && ! $isAssignee) {
             abort(403, __('errors.forbidden'));
         }
 
-        $points = $task->pointsForCompletion();
         $needsApproval = $user->isChild() && $task->requires_approval;
         $status = $needsApproval ? TaskCompletion::STATUS_PENDING : TaskCompletion::STATUS_APPROVED;
 
-        $completion = DB::transaction(function () use ($task, $user, $points, $status, $household, $needsApproval, $request) {
-            $completion = $task->completions()->create([
+        $completion = DB::transaction(function () use ($task, $user, $status, $household, $needsApproval, $request) {
+            $lockedTask = Task::query()
+                ->whereKey($task->id)
+                ->lockForUpdate()
+                ->firstOrFail();
+
+            $completionQuery = $lockedTask->completions()
+                ->whereIn('status', [TaskCompletion::STATUS_PENDING, TaskCompletion::STATUS_APPROVED]);
+
+            if ($lockedTask->frequency === 'once') {
+                abort_if($completionQuery->exists(), 422, __('errors.task_already_completed'));
+            } else {
+                // Recorrencias ainda nao geram instancias por periodo; por enquanto,
+                // limitamos uma pontuacao por usuario/dia para evitar duplicidade.
+                abort_if(
+                    $completionQuery
+                        ->where('completed_by_user_id', $user->id)
+                        ->where('completed_at', '>=', now()->startOfDay())
+                        ->exists(),
+                    422,
+                    __('errors.task_already_completed'),
+                );
+            }
+
+            $points = $lockedTask->pointsForCompletion();
+
+            $completion = $lockedTask->completions()->create([
                 'completed_by_user_id' => $user->id,
                 'completed_at' => now(),
                 'status' => $status,
@@ -58,22 +81,26 @@ class TaskCompletionController extends Controller
                     ? PointTransaction::STATUS_PENDING
                     : PointTransaction::STATUS_CONFIRMED,
                 'reason_key' => 'gamification.reason.task_completed',
-                'meta' => ['task_id' => $task->id, 'task_title' => $task->title],
+                'meta' => ['task_id' => $lockedTask->id, 'task_title' => $lockedTask->title],
             ]);
 
-            // Atualiza o status da Task quando concluída por adulto e for tarefa única
-            if (! $needsApproval && $task->frequency === 'once') {
-                $task->forceFill(['status' => Task::STATUS_COMPLETED])->save();
+            if (! $needsApproval) {
+                $lockedTask->forceFill([
+                    'status' => $lockedTask->frequency === 'once'
+                        ? Task::STATUS_COMPLETED
+                        : $lockedTask->status,
+                    'completed_at' => now(),
+                ])->save();
             }
 
             return $completion;
         });
 
-        return TaskCompletionResource::make($completion->load('completedBy'));
+        return TaskCompletionResource::make($completion->fresh()->load('completedBy'));
     }
 
     /**
-     * Aprova uma conclusão pendente.
+     * Aprova uma conclusao pendente.
      */
     public function approve(
         Request $request,
@@ -96,7 +123,6 @@ class TaskCompletionController extends Controller
                 'approved_at' => now(),
             ])->save();
 
-            // Atualiza individualmente para que o Observer dispare AchievementChecker.
             PointTransaction::where('source_type', PointTransaction::SOURCE_TASK)
                 ->where('source_id', $completion->id)
                 ->where('status', PointTransaction::STATUS_PENDING)
@@ -105,19 +131,19 @@ class TaskCompletionController extends Controller
                     $tx->save();
                 });
 
-            if ($task->frequency === 'once') {
-                $task->forceFill(['status' => Task::STATUS_COMPLETED])->save();
-            }
+            $task->forceFill([
+                'status' => $task->frequency === 'once' ? Task::STATUS_COMPLETED : $task->status,
+                'completed_at' => now(),
+            ])->save();
         });
 
-        // Garantia adicional: rechecagem direta para o concluinte (defensive).
         $checker->checkForUser($completion->completedBy, $household->id);
 
         return TaskCompletionResource::make($completion->fresh()->load('completedBy'));
     }
 
     /**
-     * Rejeita uma conclusão pendente.
+     * Rejeita uma conclusao pendente.
      */
     public function reject(Request $request, Household $household, TaskCompletion $completion): JsonResponse
     {
@@ -147,7 +173,7 @@ class TaskCompletionController extends Controller
     }
 
     /**
-     * Lista conclusões pendentes de aprovação na casa (apenas adultos veem).
+     * Lista conclusoes pendentes de aprovacao na casa (apenas adultos veem).
      */
     public function pending(Request $request, Household $household)
     {

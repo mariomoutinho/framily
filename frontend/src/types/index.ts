@@ -22,6 +22,8 @@ export type PointStatus = 'pending' | 'confirmed' | 'cancelled';
 
 export type TaskStatus = 'open' | 'in_progress' | 'completed' | 'overdue';
 
+export type TaskFrequency = 'once' | 'daily' | 'weekly' | 'monthly' | 'weekdays' | 'specific_dates';
+
 export type ApprovalStatus = 'pending' | 'approved' | 'rejected';
 
 export interface User {
@@ -66,13 +68,17 @@ export interface Task {
   description: string | null;
   difficulty: DifficultyPreset;
   priority: 'low' | 'normal' | 'high';
-  frequency: 'once' | 'daily' | 'weekly' | 'monthly';
+  frequency: TaskFrequency;
+  frequency_days: number[];
+  frequency_dates: string[];
   status: TaskStatus;
   due_at: string | null;
+  completed_at: string | null;
   assignees: User[];
   requires_approval?: boolean;
   pending_completions_count?: number;
   points_for_completion?: number;
+  last_completion?: TaskCompletion;
 }
 
 export interface TaskCompletion {

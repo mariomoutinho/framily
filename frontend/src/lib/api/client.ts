@@ -23,6 +23,7 @@ export type ApiResult<T> =
 
 export interface ApiOptions extends Omit<RequestInit, 'body'> {
   json?: unknown;
+  body?: BodyInit | null;
   token?: string | null; // override
   next?: { revalidate?: number; tags?: string[] };
 }

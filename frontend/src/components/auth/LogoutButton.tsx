@@ -1,13 +1,14 @@
 'use client';
 
 import { useTransition } from 'react';
+import type { Route } from 'next';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { LogOut } from 'lucide-react';
 import { Button, type ButtonProps } from '@/components/ui/button';
 
 interface LogoutButtonProps extends Omit<ButtonProps, 'onClick'> {
-  redirectTo?: string;
+  redirectTo?: Route;
 }
 
 export function LogoutButton({

@@ -21,7 +21,7 @@ class TaskController extends Controller
         $this->authorize('view', $household);
 
         $query = $household->tasks()
-            ->with(['difficulty', 'assignees'])
+            ->with(['difficulty', 'assignees', 'lastCompletion.completedBy'])
             ->withCount(['completions as pending_completions_count' => function ($q) {
                 $q->where('status', TaskCompletion::STATUS_PENDING);
             }]);
@@ -61,6 +61,8 @@ class TaskController extends Controller
                 'difficulty_preset_id' => $request->integer('difficulty_preset_id'),
                 'priority' => $request->input('priority', 'normal'),
                 'frequency' => $request->input('frequency', 'once'),
+                'frequency_days' => $request->input('frequency_days', []),
+                'frequency_dates' => $request->input('frequency_dates', []),
                 'status' => Task::STATUS_OPEN,
                 'due_at' => $request->input('due_at'),
                 'requires_approval' => $request->boolean('requires_approval', true),
@@ -77,7 +79,7 @@ class TaskController extends Controller
             return $task;
         });
 
-        return TaskResource::make($task->load(['difficulty', 'assignees']));
+        return TaskResource::make($task->load(['difficulty', 'assignees', 'lastCompletion.completedBy']));
     }
 
     public function show(Household $household, Task $task): TaskResource
@@ -85,7 +87,7 @@ class TaskController extends Controller
         $this->authorize('view', $household);
         abort_if($task->household_id !== $household->id, 404);
 
-        $task->load(['difficulty', 'assignees', 'completions.completedBy']);
+        $task->load(['difficulty', 'assignees', 'completions.completedBy', 'lastCompletion.completedBy']);
 
         return TaskResource::make($task);
     }
@@ -98,7 +100,8 @@ class TaskController extends Controller
         DB::transaction(function () use ($request, $household, $task) {
             $task->fill($request->only([
                 'title', 'description', 'difficulty_preset_id',
-                'priority', 'frequency', 'status', 'due_at', 'requires_approval',
+                'priority', 'frequency', 'frequency_days', 'frequency_dates',
+                'status', 'due_at', 'requires_approval',
             ]))->save();
 
             if ($request->has('assignee_user_ids')) {
@@ -108,7 +111,7 @@ class TaskController extends Controller
             }
         });
 
-        return TaskResource::make($task->load(['difficulty', 'assignees']));
+        return TaskResource::make($task->load(['difficulty', 'assignees', 'lastCompletion.completedBy']));
     }
 
     public function destroy(Household $household, Task $task): JsonResponse

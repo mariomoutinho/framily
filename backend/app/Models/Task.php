@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Task extends Model
@@ -14,8 +15,11 @@ class Task extends Model
     use HasFactory, SoftDeletes;
 
     public const STATUS_OPEN = 'open';
+
     public const STATUS_IN_PROGRESS = 'in_progress';
+
     public const STATUS_COMPLETED = 'completed';
+
     public const STATUS_OVERDUE = 'overdue';
 
     protected $fillable = [
@@ -25,14 +29,20 @@ class Task extends Model
         'difficulty_preset_id',
         'priority',
         'frequency',
+        'frequency_days',
+        'frequency_dates',
         'status',
         'due_at',
+        'completed_at',
         'requires_approval',
         'created_by_user_id',
     ];
 
     protected $casts = [
+        'frequency_days' => 'array',
+        'frequency_dates' => 'array',
         'due_at' => 'datetime',
+        'completed_at' => 'datetime',
         'requires_approval' => 'boolean',
     ];
 
@@ -64,6 +74,11 @@ class Task extends Model
     public function completions(): HasMany
     {
         return $this->hasMany(TaskCompletion::class);
+    }
+
+    public function lastCompletion(): HasOne
+    {
+        return $this->hasOne(TaskCompletion::class)->latestOfMany('completed_at');
     }
 
     public function pointsForCompletion(): int

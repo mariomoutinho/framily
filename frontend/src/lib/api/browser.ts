@@ -33,6 +33,26 @@ export async function postJson<T = unknown>(
   return { ok: true, data: payload as T };
 }
 
+export async function patchJson<T = unknown>(
+  path: string,
+  body: unknown,
+): Promise<{ ok: true; data: T } | { ok: false; status: number; error: ApiErrorBody['error'] }> {
+  const response = await fetch(path, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+    body: JSON.stringify(body),
+    credentials: 'same-origin',
+  });
+
+  const payload = (await response.json().catch(() => null)) as (T & ApiErrorBody) | null;
+
+  if (!response.ok) {
+    return { ok: false, status: response.status, error: payload?.error };
+  }
+
+  return { ok: true, data: payload as T };
+}
+
 export async function getJson<T = unknown>(
   path: string,
 ): Promise<{ ok: true; data: T } | { ok: false; status: number; error: ApiErrorBody['error'] }> {
